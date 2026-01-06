@@ -1,12 +1,13 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, CSSProperties } from 'react';
 
 interface CardProps {
   children: ReactNode;
   className?: string;
   animate?: boolean;
+  style?: CSSProperties;
 }
 
-export const Card: React.FC<CardProps> = ({ children, className = '', animate = true }) => {
+export const Card: React.FC<CardProps> = ({ children, className = '', animate = true, style }) => {
   return (
     <div 
       className={`
@@ -14,6 +15,7 @@ export const Card: React.FC<CardProps> = ({ children, className = '', animate = 
         ${animate ? 'animate-scale-in' : ''} 
         ${className}
       `}
+      style={style}
     >
       {children}
     </div>
