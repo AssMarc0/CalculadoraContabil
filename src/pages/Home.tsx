@@ -3,14 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { 
   Building2, 
   Calculator, 
-  LogOut, 
-  Shield, 
-  Clock, 
-  TrendingUp, 
-  FileText,
-  Users,
-  CheckCircle2,
-  ArrowRight
+  ArrowRight,
+  Receipt,
+  Percent,
+  Scale,
+  Info
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { PageContainer } from '@/components/PageContainer';
@@ -19,191 +16,190 @@ import { Card } from '@/components/Card';
 const Home: React.FC = () => {
   const navigate = useNavigate();
 
-  const features = [
+  const regimesTributarios = [
     {
-      icon: Shield,
-      title: 'Segurança Garantida',
-      description: 'Seus dados protegidos com as melhores práticas do mercado'
+      nome: 'Simples Nacional',
+      faixa: 'Até R$ 4,8 milhões/ano',
+      aliquota: '4% a 33%',
+      descricao: 'Regime unificado de arrecadação para micro e pequenas empresas. O cálculo considera a receita bruta dos últimos 12 meses e o anexo correspondente à atividade.',
+      calculo: 'Receita Mensal × Alíquota Efetiva (baseada no anexo e faturamento)'
     },
     {
-      icon: Clock,
-      title: 'Economia de Tempo',
-      description: 'Calcule impostos em segundos, não em horas'
+      nome: 'Lucro Presumido',
+      faixa: 'Até R$ 78 milhões/ano',
+      aliquota: 'IRPJ 15% + CSLL 9%',
+      descricao: 'A base de cálculo é presumida conforme a atividade: 8% para comércio, 32% para serviços. Ideal para empresas com margens superiores à presunção.',
+      calculo: 'Receita × Presunção × (IRPJ 15% + CSLL 9%)'
     },
     {
-      icon: TrendingUp,
-      title: 'Gestão Inteligente',
-      description: 'Acompanhe a evolução fiscal da sua empresa'
-    },
-    {
-      icon: FileText,
-      title: 'Relatórios Completos',
-      description: 'Documentação detalhada para sua contabilidade'
+      nome: 'Lucro Real',
+      faixa: 'Obrigatório acima de R$ 78 mi',
+      aliquota: 'IRPJ 15% + CSLL 9%',
+      descricao: 'Tributa o lucro efetivo da empresa. Exige escrituração contábil completa. Recomendado para empresas com margens reduzidas ou prejuízo.',
+      calculo: '(Receita - Despesas) × Alíquotas de IRPJ e CSLL'
     }
-  ];
-
-  const benefits = [
-    'Suporte a Simples Nacional, Lucro Presumido e Lucro Real',
-    'Cadastro ilimitado de empresas',
-    'Cálculos precisos e atualizados',
-    'Interface intuitiva e responsiva',
-    'Totalmente gratuito para uso'
   ];
 
   return (
     <PageContainer>
       <div className="flex flex-col min-h-[90vh]">
-        {/* Hero Section */}
-        <section className="flex flex-col items-center justify-center py-16 space-y-8 animate-fade-in-up">
-          <div className="text-center">
-            <div className="w-24 h-24 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center shadow-elevated animate-scale-in">
-              <Building2 className="w-12 h-12 text-primary-foreground" />
+        {/* Header */}
+        <header className="py-8 animate-fade-in">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center">
+              <Building2 className="w-6 h-6 text-primary-foreground" />
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-4 tracking-tight">
-              Conta<span className="text-primary">Fácil</span>
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              O sistema contábil mais simples e eficiente para gestão de empresas e cálculo de impostos
-            </p>
+            <div>
+              <h1 className="text-2xl font-bold text-foreground tracking-tight">
+                ContaFácil
+              </h1>
+              <p className="text-sm text-muted-foreground">
+                Gestão Tributária Simplificada
+              </p>
+            </div>
           </div>
+        </header>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 w-full max-w-md">
-            <Button
-              variant="hero"
-              className="flex-1 group"
-              onClick={() => navigate('/cadastro')}
-            >
-              <Building2 className="w-5 h-5 mr-2" />
-              Cadastrar Empresa
-              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-            </Button>
+        {/* Hero Section */}
+        <section className="py-12 animate-fade-in-up">
+          <div className="max-w-2xl">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 leading-tight">
+              Calcule os impostos da sua empresa com precisão e agilidade
+            </h2>
+            <p className="text-lg text-muted-foreground mb-8">
+              Ferramenta profissional para simulação tributária nos regimes Simples Nacional, 
+              Lucro Presumido e Lucro Real.
+            </p>
 
-            <Button
-              variant="outline"
-              size="lg"
-              className="flex-1"
-              onClick={() => navigate('/calculo')}
-            >
-              <Calculator className="w-5 h-5 mr-2" />
-              Calcular Impostos
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button
+                variant="hero"
+                className="group"
+                onClick={() => navigate('/cadastro')}
+              >
+                <Building2 className="w-5 h-5 mr-2" />
+                Cadastrar Empresa
+                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+              </Button>
+
+              <Button
+                variant="outline"
+                size="lg"
+                onClick={() => navigate('/calculo')}
+              >
+                <Calculator className="w-5 h-5 mr-2" />
+                Calcular Impostos
+              </Button>
+            </div>
           </div>
         </section>
 
-        {/* Stats Section */}
-        <section className="py-12 animate-fade-in stagger-2">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-            {[
-              { value: '3', label: 'Regimes Tributários' },
-              { value: '100%', label: 'Gratuito' },
-              { value: '24/7', label: 'Disponível' },
-              { value: '∞', label: 'Empresas' }
-            ].map((stat, index) => (
-              <div 
-                key={index}
-                className="text-center p-6 rounded-xl bg-card border border-border hover:shadow-card transition-shadow"
-              >
-                <div className="text-3xl md:text-4xl font-bold text-primary mb-1">
-                  {stat.value}
+        {/* Funcionalidades */}
+        <section className="py-10 border-t border-border">
+          <div className="grid md:grid-cols-2 gap-6">
+            <Card className="hover:shadow-card transition-shadow">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <Building2 className="w-6 h-6 text-primary" />
                 </div>
-                <div className="text-sm text-muted-foreground">
-                  {stat.label}
+                <div>
+                  <h3 className="font-semibold text-foreground mb-2">Cadastro de Empresas</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Registre os dados da empresa incluindo CNPJ, regime tributário, 
+                    renda mensal e tipo societário. As informações ficam salvas para 
+                    cálculos futuros.
+                  </p>
                 </div>
               </div>
-            ))}
+            </Card>
+
+            <Card className="hover:shadow-card transition-shadow">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <Calculator className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-foreground mb-2">Cálculo de Impostos</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Simule a carga tributária com base no regime escolhido. 
+                    O sistema solicita apenas os dados necessários para cada modalidade 
+                    e apresenta o resultado detalhado.
+                  </p>
+                </div>
+              </div>
+            </Card>
           </div>
         </section>
 
-        {/* Features Section */}
-        <section className="py-12">
-          <div className="text-center mb-10">
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">
-              Por que escolher o ContaFácil?
-            </h2>
-            <p className="text-muted-foreground max-w-xl mx-auto">
-              Desenvolvido para simplificar sua gestão tributária
-            </p>
+        {/* Regimes Tributários */}
+        <section className="py-10 border-t border-border">
+          <div className="flex items-center gap-2 mb-6">
+            <Info className="w-5 h-5 text-primary" />
+            <h3 className="text-lg font-semibold text-foreground">
+              Entenda os Regimes Tributários
+            </h3>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            {features.map((feature, index) => (
+          <div className="grid gap-4">
+            {regimesTributarios.map((regime, index) => (
               <Card 
                 key={index} 
-                className={`text-center hover:shadow-elevated transition-all duration-300 hover:-translate-y-1 opacity-0 animate-fade-in-up`}
-                style={{ animationDelay: `${index * 100}ms`, animationFillMode: 'forwards' }}
+                className="hover:shadow-card transition-shadow"
+                animate={false}
               >
-                <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-primary/10 flex items-center justify-center">
-                  <feature.icon className="w-7 h-7 text-primary" />
+                <div className="flex flex-col lg:flex-row lg:items-start gap-4">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3 mb-2">
+                      <h4 className="font-semibold text-foreground">{regime.nome}</h4>
+                      <span className="text-xs px-2 py-1 rounded-full bg-muted text-muted-foreground">
+                        {regime.faixa}
+                      </span>
+                    </div>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      {regime.descricao}
+                    </p>
+                  </div>
+                  
+                  <div className="lg:w-72 flex-shrink-0 p-4 rounded-lg bg-muted/50 border border-border">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Percent className="w-4 h-4 text-primary" />
+                      <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+                        Fórmula
+                      </span>
+                    </div>
+                    <p className="text-sm font-medium text-foreground">
+                      {regime.calculo}
+                    </p>
+                    <div className="mt-2 flex items-center gap-2">
+                      <Receipt className="w-4 h-4 text-muted-foreground" />
+                      <span className="text-xs text-muted-foreground">
+                        Alíquota: {regime.aliquota}
+                      </span>
+                    </div>
+                  </div>
                 </div>
-                <h3 className="font-semibold text-foreground mb-2">{feature.title}</h3>
-                <p className="text-sm text-muted-foreground">{feature.description}</p>
               </Card>
             ))}
           </div>
         </section>
 
-        {/* Benefits Section */}
-        <section className="py-12">
-          <Card className="max-w-3xl mx-auto bg-gradient-to-br from-primary/5 to-transparent">
-            <div className="flex flex-col md:flex-row items-center gap-8">
-              <div className="flex-shrink-0">
-                <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center">
-                  <Users className="w-10 h-10 text-primary" />
-                </div>
-              </div>
-              <div className="flex-1">
-                <h3 className="text-xl font-bold text-foreground mb-4">
-                  Tudo o que você precisa em um só lugar
-                </h3>
-                <ul className="space-y-3">
-                  {benefits.map((benefit, index) => (
-                    <li key={index} className="flex items-center gap-3 text-muted-foreground">
-                      <CheckCircle2 className="w-5 h-5 text-success flex-shrink-0" />
-                      <span>{benefit}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </Card>
-        </section>
-
-        {/* CTA Section */}
-        <section className="py-12 text-center">
-          <Card className="max-w-2xl mx-auto bg-gradient-to-r from-primary to-primary/80 text-primary-foreground border-0">
-            <h3 className="text-2xl font-bold mb-3">
-              Comece agora mesmo!
-            </h3>
-            <p className="mb-6 opacity-90">
-              Cadastre sua primeira empresa e descubra como é fácil gerenciar seus impostos
+        {/* Aviso Legal */}
+        <section className="py-6 mt-auto">
+          <div className="flex items-start gap-3 p-4 rounded-lg bg-muted/30 border border-border">
+            <Scale className="w-5 h-5 text-muted-foreground flex-shrink-0 mt-0.5" />
+            <p className="text-xs text-muted-foreground">
+              <strong>Nota:</strong> Este sistema realiza simulações para fins de planejamento. 
+              Os valores apresentados são estimativas e não substituem a orientação de um 
+              contador habilitado. Consulte sempre um profissional para decisões tributárias.
             </p>
-            <Button
-              variant="secondary"
-              size="lg"
-              onClick={() => navigate('/cadastro')}
-              className="bg-white text-primary hover:bg-white/90"
-            >
-              <Building2 className="w-5 h-5 mr-2" />
-              Começar Gratuitamente
-            </Button>
-          </Card>
+          </div>
         </section>
 
         {/* Footer */}
-        <footer className="py-8 mt-auto border-t border-border">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-            <p>© 2025 ContaFácil - Todos os direitos reservados</p>
-            <Button
-              variant="ghost"
-              size="sm"
-              className="text-muted-foreground hover:text-destructive"
-              onClick={() => window.close()}
-            >
-              <LogOut className="w-4 h-4 mr-2" />
-              Sair do Sistema
-            </Button>
-          </div>
+        <footer className="py-6 border-t border-border">
+          <p className="text-xs text-muted-foreground text-center">
+            © 2025 ContaFácil — Sistema de Simulação Tributária
+          </p>
         </footer>
       </div>
     </PageContainer>
